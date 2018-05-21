@@ -1,0 +1,10 @@
+{
+  "name": "sessionization",
+  "version": "1.0.0",
+  "description": "Sessionization",
+  "main": "main.js",
+  "repository": "https://github.com/maurish/sessionization",
+  "author": "Pauli Perälä",
+  "license": "MIT",
+  "private": false
+}
