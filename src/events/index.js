@@ -7,12 +7,13 @@ const noop = (e, acc) => acc;
 const events = {
   stream_start: require('./streamStart'),
   ad_start: require('./adStart'),
-  ad_end: noop,
-  track_start: noop,
-  track_end: noop,
-  track_hearbeat: noop,
-  pause: noop,
-  play: noop,
+  ad_end: require('./adEnd'),
+  track_start: require('./trackStart'),
+  track_end: require('./trackEnd'),
+  track_hearbeat: noop, // typo in dataset2.json
+  track_heartbeat: noop,
+  pause: require('./pause'),
+  play: require('./play'),
   stream_end: require('./streamEnd')
 };
 
@@ -40,11 +41,12 @@ module.exports = eventType => {
       record => R.merge(record, {
         session_end: e.timestamp,
         event_count: record.event_count + 1,
-        total_time: e.timestamp - record.session_start
+        total_time: e.timestamp - record.session_start,
+        track_playtime: record.track_playtime + (record.state === 'open/playing' ? (e.timestamp - record.session_end) : 0)
       }),
       record => handler(e, record)
     )(acc);
-
+    
     if (newRecord) {
       return R.append(record, acc);
     }
