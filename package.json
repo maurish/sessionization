@@ -2,9 +2,16 @@
   "name": "sessionization",
   "version": "1.0.0",
   "description": "Sessionization",
-  "main": "main.js",
+  "main": "index.js",
   "repository": "https://github.com/maurish/sessionization",
   "author": "Pauli Perälä",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "lazy": "^1.0.11",
+    "ramda": "^0.25.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
 }
